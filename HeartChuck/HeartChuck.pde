@@ -22,33 +22,86 @@ const int OH_PIN6 = 13;
 // (the OpenHeart uses charlieplexing to minimize the number of pins needed)
 const int OH_LED_TO_PINS[OH_NUM_LEDS][2] =
 {
-  { OH_PIN3, OH_PIN1 },
-  { OH_PIN1, OH_PIN3 },
-  { OH_PIN2, OH_PIN1 },
-  { OH_PIN1, OH_PIN2 },
-  { OH_PIN3, OH_PIN4 },
-  { OH_PIN4, OH_PIN1 },
-  { OH_PIN1, OH_PIN4 },
-  { OH_PIN1, OH_PIN5 },
-  { OH_PIN6, OH_PIN1 },
-  { OH_PIN1, OH_PIN6 },
-  { OH_PIN6, OH_PIN2 },
-  { OH_PIN4, OH_PIN3 },
-  { OH_PIN3, OH_PIN5 },
-  { OH_PIN5, OH_PIN3 },
-  { OH_PIN5, OH_PIN1 },
-  { OH_PIN2, OH_PIN5 },
-  { OH_PIN5, OH_PIN2 },
-  { OH_PIN2, OH_PIN6 },
-  { OH_PIN4, OH_PIN5 },
-  { OH_PIN5, OH_PIN4 },
-  { OH_PIN3, OH_PIN2 },
-  { OH_PIN6, OH_PIN5 },
-  { OH_PIN5, OH_PIN6 },
-  { OH_PIN4, OH_PIN6 },
-  { OH_PIN2, OH_PIN3 },
-  { OH_PIN6, OH_PIN4 },
-  { OH_PIN4, OH_PIN2 }
+  { 
+    OH_PIN3, OH_PIN1   }
+  ,
+  { 
+    OH_PIN1, OH_PIN3   }
+  ,
+  { 
+    OH_PIN2, OH_PIN1   }
+  ,
+  { 
+    OH_PIN1, OH_PIN2   }
+  ,
+  { 
+    OH_PIN3, OH_PIN4   }
+  ,
+  { 
+    OH_PIN4, OH_PIN1   }
+  ,
+  { 
+    OH_PIN1, OH_PIN4   }
+  ,
+  { 
+    OH_PIN1, OH_PIN5   }
+  ,
+  { 
+    OH_PIN6, OH_PIN1   }
+  ,
+  { 
+    OH_PIN1, OH_PIN6   }
+  ,
+  { 
+    OH_PIN6, OH_PIN2   }
+  ,
+  { 
+    OH_PIN4, OH_PIN3   }
+  ,
+  { 
+    OH_PIN3, OH_PIN5   }
+  ,
+  { 
+    OH_PIN5, OH_PIN3   }
+  ,
+  { 
+    OH_PIN5, OH_PIN1   }
+  ,
+  { 
+    OH_PIN2, OH_PIN5   }
+  ,
+  { 
+    OH_PIN5, OH_PIN2   }
+  ,
+  { 
+    OH_PIN2, OH_PIN6   }
+  ,
+  { 
+    OH_PIN4, OH_PIN5   }
+  ,
+  { 
+    OH_PIN5, OH_PIN4   }
+  ,
+  { 
+    OH_PIN3, OH_PIN2   }
+  ,
+  { 
+    OH_PIN6, OH_PIN5   }
+  ,
+  { 
+    OH_PIN5, OH_PIN6   }
+  ,
+  { 
+    OH_PIN4, OH_PIN6   }
+  ,
+  { 
+    OH_PIN2, OH_PIN3   }
+  ,
+  { 
+    OH_PIN6, OH_PIN4   }
+  ,
+  { 
+    OH_PIN4, OH_PIN2   }
 };
 
 // ranges derived from observing the joystick values displayed
@@ -74,12 +127,23 @@ const int GRID_Y_MAX = 5;
 // see repeated LEDs in this mapping
 const int GRID_TO_LED[GRID_Y_MAX+1][GRID_X_MAX+1] =
 {
-  {  0,   0,   1,   1,   2,   3,   3  },
-  {  4,   5,   6,   7,   8,   9,  10  },
-  { 11,  12,  13,  14,  15,  16,  17  },
-  { 18,  18,  19,  20,  21,  22,  22  },
-  { 23,  23,  23,  24,  25,  25,  25  },
-  { 26,  26,  26,  26,  26,  26,  26  }
+  {  
+    0,   0,   1,   1,   2,   3,   3    }
+  ,
+  {  
+    4,   5,   6,   7,   8,   9,  10    }
+  ,
+  { 
+    11,  12,  13,  14,  15,  16,  17    }
+  ,
+  { 
+    18,  18,  19,  20,  21,  22,  22    }
+  ,
+  { 
+    23,  23,  23,  24,  25,  25,  25    }
+  ,
+  { 
+    26,  26,  26,  26,  26,  26,  26    }
 };
 
 // the LED position the joystick was last at
@@ -104,15 +168,15 @@ void loop()
   // of the joystick increases from bottom to top and we want the Y
   // value in our grid to increase from top to bottom
   const int x = constrain(map(nunchuck_joyx(),
-                              JOY_X_MIN, JOY_X_MAX,
-                              GRID_X_MIN, GRID_X_MAX),
-                          GRID_X_MIN,
-                          GRID_X_MAX);
+  JOY_X_MIN, JOY_X_MAX,
+  GRID_X_MIN, GRID_X_MAX),
+  GRID_X_MIN,
+  GRID_X_MAX);
   const int y = constrain(map(nunchuck_joyy(),
-                              JOY_Y_MIN, JOY_Y_MAX,
-                              GRID_Y_MAX, GRID_Y_MIN),
-                          GRID_Y_MIN,
-                          GRID_Y_MAX);
+  JOY_Y_MIN, JOY_Y_MAX,
+  GRID_Y_MAX, GRID_Y_MIN),
+  GRID_Y_MIN,
+  GRID_Y_MAX);
   const int newLed = GRID_TO_LED[y][x];
 
   // only bother to update the OpenHeart if the LED
@@ -146,3 +210,4 @@ void oh_all_off()
   pinMode(OH_PIN5, INPUT);
   pinMode(OH_PIN6, INPUT);
 }
+
