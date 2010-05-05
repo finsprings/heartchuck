@@ -17,8 +17,8 @@ static uint8_t nunchuck_buf[6];   // array to store nunchuck data,
 // Uses port C (analog in) pins as power & ground for Nunchuck
 static void nunchuck_setpowerpins()
 {
-#define pwrpin PC3
-#define gndpin PC2
+#define pwrpin PORTC3
+#define gndpin PORTC2
   DDRC |= _BV(pwrpin) | _BV(gndpin);
   PORTC &=~ _BV(gndpin);
   PORTC |=  _BV(pwrpin);
